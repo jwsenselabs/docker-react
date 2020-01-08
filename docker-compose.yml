@@ -1,0 +1,22 @@
+version: '3'
+services:
+    web:
+        build:
+            # Parameter müssen angegeben werden, da wir das Dockerfile umbenannt werden
+            context: .
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000"
+        volumes:
+            # Nutzt den im Container vorhanden node_modules Ordner
+            - /app/node_modules
+            # Der Container referenziert hiermit die Ordner aus unserem Host-Verzeichnis in seinem eigenen Arbeitsverzeichnis. Das sorgt dafür, dass wir am Source-Code arbeiten können und die Änderungen direkt in der laufenden Anwendung im Docker-Container gespiegelt werden
+            - .:/app
+    tests:
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules
+            - .:/app
+        command: ["npm", "run", "test"]

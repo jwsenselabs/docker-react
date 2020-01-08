@@ -1,0 +1,13 @@
+FROM node:alpine
+
+WORKDIR /app
+
+COPY package.json .
+RUN npm install
+
+# Diese Zeile könnten wir uns eigentlich dank der Volumen sparen, da der Container unser Host-Verzeichnis referenziert (siehe docker-compose.yml).
+# Wenn man sich aber in der Zukunft mal gegen das docker-compose entscheiden würde, braucht man diese Zeile zwingend wieder. Deswegen ist es hier
+# im Grunde Geschmackssache, ob sie drin bleibt oder nicht.
+COPY . .
+
+CMD ["npm", "run", "start"]
