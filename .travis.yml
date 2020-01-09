@@ -7,4 +7,4 @@ before_install:
     - docker build -t jwsenselabs/docker-react -f Dockerfile.dev . 
     
 script: 
-    - docker run -e CI=true jwsensenselabs/docker-react npm run test
+    - docker run -e CI=true jwsenselabs/docker-react npm run test
