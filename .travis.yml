@@ -1,0 +1,10 @@
+# Diese Datei wird von Travis CI genutzt, um die folgenden Aktionen nach Git Pushs zu triggern
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t jwsenselabs/docker-react -f Dockerfile.dev . 
+    
+script: 
+    - docker run -e CI=true jwsensenselabs/docker-react npm run test
