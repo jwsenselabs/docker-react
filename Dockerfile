@@ -10,6 +10,9 @@ RUN npm run build
 
 # Eine zweite Phase beginnt mit der Nutzung eines neuen Base-Image. Hier nginx, ein Webserver für die Produktionsumgebung.
 FROM nginx
+
+# Wird von AWS genutzt, um den Container-Port 80 auf den Host-Port zu mappen 
+EXPOSE 80
 # Kopiert die Build-Artefakte aus der ersten Phase in den nginx-Ordner
 COPY --from=builder /app/build /usr/share/nginx/html
 
