@@ -1,7 +1,7 @@
 # Nutzt Node als Base-Image in der "Builder"-Phase
 FROM node:alpine as builder
 WORKDIR /app
-COPY package.json .
+COPY package*.json ./
 RUN npm install
 
 # Der Kopierschritt ist hier, im Gegensatz zur dev-Version, zwingend notwendig!
