@@ -8,3 +8,20 @@ before_install:
     
 script: 
     - docker run -e CI=true jwsenselabs/docker-react npm run test
+
+deploy:
+    # behebt travis ci bug
+    #edge: true    
+    # aws configs
+    provider: elasticbeanstalk
+    region: "us-east-2"
+    app: "docker-demo"
+    env: "DockerDemo-env"
+    # name vom  aws s3 bucket storage, hält .zip-file zum starten der anwendung
+    bucket_name: "elasticbeanstalk-us-east-2-292704706716"
+    bucket_path: "docker-demo"
+    # es wird nur deployt, wenn auf den master branch gepusht wird
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
